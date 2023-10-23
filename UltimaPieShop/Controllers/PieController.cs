@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UltimaPieShop.Models;
+using UltimaPieShop.ViewModels;
 
 namespace UltimaPieShop.Controllers
 {
@@ -16,10 +17,13 @@ namespace UltimaPieShop.Controllers
 
         public IActionResult List()
         {
-            //ViewBag.CurrentCategory = "Cheese cakes";
+            // ViewBag.CurrentCategory = "Cheese cakes";
+            //return View(_pieRepository.AllPies);
 
-            return View(_pieRepository.AllPies);
-        
+            PieListViewModel pieListViewModel = new PieListViewModel(_pieRepository.AllPies, "Cheese cakes");
+
+            return View(pieListViewModel);
+
         }
 
     }
