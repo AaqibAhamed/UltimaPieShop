@@ -8,7 +8,7 @@
        data-bs-toggle="dropdown"
        id="nav-dropdown"
        aria-expanded="false">
-        Shop
+        Categories
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-dropdown">
         @foreach (var category in Model)
@@ -22,7 +22,11 @@
             </li>
         }
         <li>
-            <a asp-controller="Pie" asp-action="List" asp-route-Category="" class="dropdown-item">All pies</a>
+            <a 
+                asp-controller="Pie" 
+                asp-action="List" 
+                asp-route-category="" 
+                class="dropdown-item">All Pies</a>
         </li>
     </ul>
 </li>
