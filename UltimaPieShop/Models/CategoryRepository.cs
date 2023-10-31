@@ -8,14 +8,15 @@
             _ultimaPieShopDbContext = ultimaPieShopDbContext;
         }
 
-        public IEnumerable<Category> AllCategories
-        {
-            get
-            {
-                return _ultimaPieShopDbContext.Categories.OrderBy(c => c.CategoryName);
-            }
-        }
+        //public IEnumerable<Category> AllCategories
+        //{
+        //    get
+        //    {
+        //        return _ultimaPieShopDbContext.Categories.OrderBy(c => c.CategoryName);
+        //    }
+        //}
 
-        //public IEnumerable<Category> AllCategories => _ultimaPieShopDbContext.Categories.OrderBy(c => c.CategoryName);
+        // OR
+        public IEnumerable<Category> AllCategories => _ultimaPieShopDbContext.Categories.OrderBy(c => c.CategoryName);
     }
 }
