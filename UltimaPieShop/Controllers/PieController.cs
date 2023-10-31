@@ -34,7 +34,7 @@ namespace UltimaPieShop.Controllers
             if(string.IsNullOrEmpty(category))
             {
                 pies = _pieRepository.AllPies.OrderBy(p => p.PieId);
-                currentCategory = "All pies";
+                currentCategory = "All Pies";
             }
 
             else
