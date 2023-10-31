@@ -15,15 +15,48 @@ namespace UltimaPieShop.Controllers
             _pieRepository = pieRepository;
         }
 
-        public IActionResult List()
+        //public IActionResult List()
+        //{
+        //    // ViewBag.CurrentCategory = "Cheese cakes";
+        //    //return View(_pieRepository.AllPies);
+
+        //    PieListViewModel pieListViewModel = new PieListViewModel(_pieRepository.AllPies, "All Pies");
+
+        //    return View(pieListViewModel);
+
+        //}
+
+        public ViewResult List(string category) 
         {
-            // ViewBag.CurrentCategory = "Cheese cakes";
-            //return View(_pieRepository.AllPies);
+            IEnumerable<Pie> pies;
+            string? currentCategory;
 
-            PieListViewModel pieListViewModel = new PieListViewModel(_pieRepository.AllPies, "Cheese cakes");
+            if(string.IsNullOrEmpty(category))
+            {
+                pies = _pieRepository.AllPies.OrderBy(p => p.PieId);
+                currentCategory = "All pies";
+            }
 
-            return View(pieListViewModel);
+            else
+            {
+                pies = _pieRepository.AllPies.Where(p => p.Category.CategoryName == category)
+                    .OrderBy(p => p.PieId);
 
+                currentCategory = _categoryRepository.AllCategories.
+                    FirstOrDefault(c => c.CategoryName == category)?.CategoryName;
+            }   
+
+            return View(new PieListViewModel(pies,currentCategory));
+        }
+
+        public IActionResult Details(int id)
+        {
+            var Pie = _pieRepository.GetPieById(id);
+            if (Pie == null)
+            {
+                return NotFound();
+            }
+            return View(Pie);
         }
 
     }
