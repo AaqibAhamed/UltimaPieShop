@@ -5,6 +5,7 @@ using UltimaPieShop.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<UltimaPieShopDbContext>(
     option =>
@@ -36,6 +37,8 @@ app.UseStaticFiles();
 app.UseSession();
 
 app.MapDefaultControllerRoute();
+
+app.MapRazorPages();
 
 //app.MapGet("/", () => "Hello World!");
 
