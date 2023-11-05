@@ -34,7 +34,7 @@ namespace UltimaPieShop.Models
 
         public IEnumerable<Pie> SearchPies(string searchQuery)
         {
-            throw new NotImplementedException();
+            return _ultimaPieShopDbContext.Pies.Where(p => p.Name.Contains(searchQuery));
         }
     }
 }
