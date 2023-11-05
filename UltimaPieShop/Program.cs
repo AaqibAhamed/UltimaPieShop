@@ -1,10 +1,18 @@
 
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 using UltimaPieShop.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(option =>
+    {
+        //// Avoid infinite loop for model references 
+        option.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
+
 builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<UltimaPieShopDbContext>(
@@ -37,10 +45,13 @@ app.UseStaticFiles();
 app.UseSession();
 
 app.MapDefaultControllerRoute();
+//app.MapControllerRoute(
+//name: "default",
+//pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 
-//app.MapGet("/", () => "Hello World!");
+//app.MapGet("/", () => "Hello World!"); {controller=Home}/{action=Index}/{id?}
 
 DataSeeder.Seed(app); // seed data to db for intialization db
 
