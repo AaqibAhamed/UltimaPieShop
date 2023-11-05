@@ -5,7 +5,6 @@ using UltimaPieShop.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(option =>
     {
@@ -33,6 +32,8 @@ builder.Services.AddScoped<IShoppingCart, ShoppingCart>(serviceProvider => Shopp
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddServerSideBlazor();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -52,6 +53,9 @@ app.MapDefaultControllerRoute();
 app.MapRazorPages();
 
 //app.MapGet("/", () => "Hello World!"); {controller=Home}/{action=Index}/{id?}
+
+app.MapBlazorHub();
+app.MapFallbackToPage("/app/{*catchall}", "/BlazorApp/Index");
 
 DataSeeder.Seed(app); // seed data to db for intialization db
 
