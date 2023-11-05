@@ -59,5 +59,10 @@ namespace UltimaPieShop.Controllers
             return View(Pie);
         }
 
+        public IActionResult Search()
+        {
+            return View();
+        }
+
     }
 }
