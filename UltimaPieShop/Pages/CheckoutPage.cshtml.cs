@@ -16,7 +16,7 @@ namespace UltimaPieShop.Pages
         }
 
         [BindProperty]// to get user input data to model
-        public Order Order { get; set; }
+        public Order Order { get; set; } = default!;
 
         public void OnGet()
         {
