@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using UltimaPieShop.Models;
@@ -33,6 +34,11 @@ builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddServerSideBlazor();
+
+builder.Services.AddAuthentication();
+
+//builder.Services.AddDefaultIdentity<IdentityUser>()
+//    .AddEntityFrameworkStores<UltimaPieShopDbContext>();
 
 var app = builder.Build();
 
