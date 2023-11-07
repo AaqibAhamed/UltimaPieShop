@@ -37,9 +37,6 @@ builder.Services.AddServerSideBlazor();
 
 builder.Services.AddAuthentication();
 
-//builder.Services.AddDefaultIdentity<IdentityUser>()
-//    .AddEntityFrameworkStores<UltimaPieShopDbContext>();
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
