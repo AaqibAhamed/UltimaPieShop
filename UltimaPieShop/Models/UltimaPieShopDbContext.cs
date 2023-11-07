@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace UltimaPieShop.Models
 {
-    public class UltimaPieShopDbContext : DbContext
+    public class UltimaPieShopDbContext : IdentityDbContext
     {
         public UltimaPieShopDbContext(DbContextOptions<UltimaPieShopDbContext> dbContextOptions)
             : base(dbContextOptions)
