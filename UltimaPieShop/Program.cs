@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 using UltimaPieShop.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("UltimaPieShopDbContextConnection") ?? throw new InvalidOperationException("Connection string 'UltimaPieShopDbContextConnection' not found.");
 
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(option =>
@@ -22,6 +23,9 @@ builder.Services.AddDbContext<UltimaPieShopDbContext>(
         builder.Configuration["ConnectionStrings:UltimaPieShopDbContextConnection"]);
     });
 
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddEntityFrameworkStores<UltimaPieShopDbContext>();
+
 //builder.Services.AddScoped<ICategoryRepository, MockCategoryRepository>();
 //builder.Services.AddScoped<IPieRepository, MockPieRepository>();
 
@@ -35,7 +39,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddServerSideBlazor();
 
-builder.Services.AddAuthentication();
+//builder.Services.AddAuthentication();
 
 var app = builder.Build();
 
@@ -61,5 +65,7 @@ app.MapBlazorHub();
 app.MapFallbackToPage("/app/{*catchall}", "/BlazorApp/Index");
 
 DataSeeder.Seed(app); // seed data to db for intialization db
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.Run();
