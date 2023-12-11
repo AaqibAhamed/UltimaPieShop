@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using UltimaPieShop.Models;
 
 namespace UltimaPieShop.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly IShoppingCart _shoppingCart;
